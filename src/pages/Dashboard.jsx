@@ -1,14 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import WaterParametersChart from "../components/Charts";
 import ParameterCard from "../components/ParameterCard";
+import connectMQTT from "../service/connectMQTT";
+import { useDispatch, useSelector } from "react-redux";
+import { predictionNow } from "../redux/slices/predictionSlice";
 
 function Dashboard() {
+  const dispatch = useDispatch();
+  const predictionState = useSelector((state) => state.prediction);
+
   const [isOpen, setIsOpen] = useState(false);
+  const [sensorData, setSensorData] = useState(null);
+  const [maintainancePrediction, setMaintainancePrediction] = useState(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const handlePrediction = () => {
+    if (predictionState.loading) return;
+    dispatch(predictionNow());
+  };
+
+  useEffect(() => {
+    if (predictionState.serverResponded) {
+      setMaintainancePrediction(predictionState.response);
+      console.log(predictionState.response);
+    }
+  }, [predictionState.serverResponded]);
+
+  useEffect(() => {
+    // Connect to MQTT and handle incoming messages
+    const client = connectMQTT((topic, message) => {
+      // console.log(`Received message: ${message} on topic: ${topic}`);
+      const data = JSON.parse(message);
+      setSensorData(data);
+    });
+
+    dispatch(predictionNow());
+
+    // Clean up the connection on unmount
+    return () => {
+      if (client) {
+        client.disconnect();
+      }
+    };
+  }, []);
 
   return (
     <div className=" flex flex-col gap-2 w-full h-full p-2">
@@ -79,18 +117,24 @@ function Dashboard() {
       </div>
       {/* <div className="h-screen bg-cover " style={{ backgroundImage: `url('/assets/pexels-pixabay-261411.jpg')` }}> */}
       <div className="flex flex-row justify-around w-full">
-        <ParameterCard title={"pH Value"} value={8.9} status={"Not Safe"} />
+        <ParameterCard
+          title={"pH Value"}
+          value={sensorData?.ph.toFixed(2) || 0}
+          status={
+            sensorData?.ph > 7.1 && sensorData?.ph < 7.3 ? "Safe" : "Not Safe"
+          }
+        />
         <ParameterCard
           title={"Turbidity"}
-          value={2.01}
+          value={Math.max(0, sensorData?.tbdt.toFixed(2)) || 0}
           unit={"NTU"}
-          status={"Not Safe"}
+          status={sensorData?.tbdt < 200 ? "Safe" : "Not Safe"}
         />
         <ParameterCard
           title={"Conductivity"}
-          value={8.9}
+          value={sensorData?.tds.toFixed(2) || 0}
           unit={"ppm"}
-          status={"Not Safe"}
+          status={sensorData?.tds < 2001 ? "Safe" : "Not Safe"}
         />
       </div>
       <div className="p-3 border-2 border-black">
@@ -109,13 +153,19 @@ function Dashboard() {
               <div className="flex flex-col justify-center items-center w-full">
                 <label className="text-1xl">In the next</label>
                 <label className=" font-semibold text-3xl text-center text-nowrap">
-                  3 hours
+                  {maintainancePrediction?.hour || 0} hour(s)
                 </label>
               </div>
             </div>
-            <button className="w-[80%] p-2 font-semibold text-sm text-center border border-1 rounded-md border-black">
+            <a
+              href="#"
+              onClick={() => handlePrediction()}
+              className={`w-[80%] p-2 font-semibold text-sm text-center border border-1 rounded-md border-black ${
+                predictionState.loading && "opacity-45"
+              }`}
+            >
               Run prediction
-            </button>
+            </a>
           </div>
         </div>
       </div>

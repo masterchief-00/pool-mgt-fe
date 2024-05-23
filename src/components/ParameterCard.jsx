@@ -8,7 +8,11 @@ function ParameterCard({ title, value, status, unit = null }) {
         <p className=" text-2xl">
           {value} {unit && unit}
         </p>
-        <button className=" bg-red-400 rounded-full text-white px-1 py-0 text-sm">
+        <button
+          className={`${
+            status === "Safe" ? "bg-green-400" : " bg-red-400"
+          }  rounded-full text-white px-1 py-0 text-sm`}
+        >
           {status}
         </button>
       </div>
