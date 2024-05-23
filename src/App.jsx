@@ -8,10 +8,12 @@ const routes = [
   {
     path: "/",
     element: <DefaultLayout />,
-    children: [
-      { path: "/login", element: <Login /> },
-      { path: "/dashboard", element: <Dashboard /> },
-    ],
+    children: [{ path: "/", element: <Login /> }],
+  },
+  {
+    path: "/",
+    element: <DefaultLayout />,
+    children: [{ path: "/dashboard", element: <Dashboard /> }],
   },
 ];
 

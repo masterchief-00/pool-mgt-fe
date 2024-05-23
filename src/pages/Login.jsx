@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import banner_IMG from "../assets/banner_login.jpg";
 
 export default function Login() {
-  const handleLogin = () => {};
+  const navigation = useNavigate();
+  const handleLogin = () => {
+    navigation("/dashboard");
+  };
   return (
     <div className="flex flex-col item lg:flex-row justify-center bg-white lg:justify-between h-screen">
       <div className="flex flex-col w-full lg:w-auto items-center lg:py-8">
