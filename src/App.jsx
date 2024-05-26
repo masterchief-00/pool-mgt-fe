@@ -2,7 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import Pool from "./pages/Pool";
+import { Dashboard } from "./pages/Dashboard";
+import { DashboardLayout } from "./layouts/DashboardLayout";
+import { AddPool } from "./pages/AddPool";
+import { AddOperators } from "./pages/AddOperators";
 
 const routes = [
   {
@@ -12,8 +16,22 @@ const routes = [
   },
   {
     path: "/",
-    element: <DefaultLayout />,
-    children: [{ path: "/dashboard", element: <Dashboard /> }],
+    element: <DashboardLayout />,
+    children: [
+      { path: "/pool/data", element: <Pool /> },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/pool/create",
+        element: <AddPool />,
+      },
+      {
+        path: "/operator/create",
+        element: <AddOperators />,
+      },
+    ],
   },
 ];
 
