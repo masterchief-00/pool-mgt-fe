@@ -51,7 +51,6 @@ export const Dashboard = () => {
   useEffect(() => {
     if (locationsState.serverResponded) {
       setLocations(locationsState.response);
-      console.log(locationsState.response);
     }
   }, [locationsState.serverResponded]);
 
@@ -112,6 +111,7 @@ export const Dashboard = () => {
           </div>
           <div className="h-[85%] overflow-y-scroll">
             <TablePools
+              deviceStatus={deviceStatus}
               pools={pools}
               onEdit={setPoolEditModal}
               onDelete={setPoolDeleteModal}

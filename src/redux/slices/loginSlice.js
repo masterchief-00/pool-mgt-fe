@@ -27,7 +27,6 @@ export const auth = createAsyncThunk(
 
           if (data) {
             dispatch(userActions.setUserData(data.user));
-            console.log(data.user);
 
             let str = `${capitalizeFirstLetter(
               data.user.fname

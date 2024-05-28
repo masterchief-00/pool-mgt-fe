@@ -8,7 +8,7 @@ export const Navbar = () => {
     window.location.href = "/";
   };
   return (
-    <div className=" flex w-full h-[10%] p-2">
+    <div className=" sticky top-0 flex w-full h-[10%] p-2">
       <div className=" flex flex-row items-center justify-between w-full h-full rounded-lg shadow-gray-400 bg-white p-2">
         <div className="flex flex-row justify-center items-center">
           <FaRegCalendarAlt className="text-gray-600" />

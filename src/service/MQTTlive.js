@@ -1,44 +1,41 @@
+// src/mqttService.js
 import { Client } from "paho-mqtt";
 
-const connectMQTT = (topics, onMessage) => {
+const MQTTlive = (topic, onMessage) => {
+  // Create a client instance
   const client = new Client(
     "test.mosquitto.org",
     Number(8081),
     `clientId-${Math.random() * 1000}`
   );
-  let connected = false;
 
+  // Set callback handlers
   client.onConnectionLost = (responseObject) => {
     if (responseObject.errorCode !== 0) {
       console.log(`onConnectionLost: ${responseObject.errorMessage}`);
     }
-    connected = false;
   };
 
   client.onMessageArrived = (message) => {
     // console.log(`onMessageArrived: ${message.payloadString}`);
+    // Call the onMessage callback with the received message
     onMessage(message.destinationName, message.payloadString);
   };
 
+  // Connect the client
   client.connect({
     onSuccess: () => {
       console.log("Connected to MQTT broker");
-      connected = true;
-      // Subscribe to all provided topics
-      topics.forEach((item) => {
-        client.subscribe(`${item.topic}/sensor`);
-      });
+      // Once a connection has been made, make a subscription
+      client.subscribe(`${topic}/sensor`);
     },
     onFailure: (error) => {
       console.error(`Connection failed: ${error.errorMessage}`);
     },
-    useSSL: true,
+    useSSL: true, // Use SSL for secure connection
   });
-
-  // Method to check if the client is connected
-  client.isConnected = () => connected;
 
   return client;
 };
 
-export default connectMQTT;
+export default MQTTlive;

@@ -18,7 +18,7 @@ const routes = [
     path: "/",
     element: <DashboardLayout />,
     children: [
-      { path: "/pool/data", element: <Pool /> },
+      { path: "/pool/data/:topic", element: <Pool /> },
       {
         path: "/dashboard",
         element: <Dashboard />,

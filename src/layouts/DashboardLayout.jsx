@@ -13,16 +13,14 @@ export const DashboardLayout = () => {
     const data = tokenDec(tokenStr);
     if (!data) window.location.href = "/";
   }, []);
-  
+
   return (
     <div className="flex flex-row w-full h-screen bg-gray-300 overflow-hidden">
       <Sidebar />
-      <div className="w-full h-full">
-        <main className="w-full h-full">
-          <Navbar />
-          <Outlet />
-        </main>
-      </div>
+      <main className="w-full h-full">
+        <Navbar />
+        <Outlet />
+      </main>
     </div>
   );
 };
