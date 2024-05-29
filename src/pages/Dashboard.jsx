@@ -147,17 +147,32 @@ export const Dashboard = () => {
       )}
 
       {userRole === "overseer" && (
-        <div className="w-[50%] h-[43%] rounded-lg shadow-gray-400 bg-white p-4 overflow-hidden">
-          <div className="flex flex-row justify-between h-fit">
-            <div className="flex flex-col gap-1 w-full h-full">
-              <label className="font-bold text-2xl">Available locations</label>
-              <label className="font-semibold text-md text-gray-600">
-                {locations.length} total
-              </label>
+        <div className="flex h-full flex-row">
+          <div className="w-[50%] h-[43%] rounded-lg shadow-gray-400 bg-white p-4 overflow-hidden">
+            <div className="flex flex-row justify-between h-fit">
+              <div className="flex flex-col gap-1 w-full h-full">
+                <label className="font-bold text-2xl">
+                  Available locations
+                </label>
+                <label className="font-semibold text-md text-gray-600">
+                  {locations.length} total
+                </label>
+              </div>
+            </div>
+            <div className="h-[85%] overflow-y-scroll">
+              <TableLocations locations={locations} onView={setLocationModal} />
             </div>
           </div>
-          <div className="h-[85%] overflow-y-scroll">
-            <TableLocations locations={locations} onView={setLocationModal} />
+          <div className="w-[50%] h-[43%] rounded-lg shadow-gray-400 bg-transparent p-4 overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.4927920574264!2d30.060151911394943!3d-1.956333898017703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca42ba4412995%3A0xeb7a3b7e5681a72d!2sKigali%20Serena%20Hotel!5e0!3m2!1sen!2srw!4v1716978777948!5m2!1sen!2srw"
+              width="600"
+              height="480"
+              style={{ border: 0 }}
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       )}

@@ -5,7 +5,7 @@ import tokenDec from "../../helpers/tokenDec";
 import { userActions } from "./userSlice";
 import { capitalizeFirstLetter } from "../../helpers/capitalCase";
 
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL = variables.SERVER_URL;
 
 export const auth = createAsyncThunk(
   "users/login",

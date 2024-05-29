@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL = variables.SERVER_URL;
 
 export const updatePool = createAsyncThunk(
   "pools/update",

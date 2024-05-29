@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL = variables.SERVER_URL;
 
 export const poolsAvailable = createAsyncThunk(
   "pools/location",
@@ -11,7 +11,7 @@ export const poolsAvailable = createAsyncThunk(
       const tokenStr = localStorage.getItem("token");
       let str = location.trim();
       const locParam = str.replace(" ", "&");
-      
+
       const response = await axios({
         method: "get",
         url: `${SERVER_URL}/pools/${locParam}`,

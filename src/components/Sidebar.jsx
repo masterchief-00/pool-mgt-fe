@@ -43,6 +43,12 @@ export const Sidebar = () => {
             destination={"/predict"}
             active={activeLink === "Prediction"}
           />
+
+          <SideNav
+            label={"History"}
+            destination={"/history"}
+            active={activeLink === "History"}
+          />
         </div>
         <div className="  w-[90%] h-[1px] bg-gray-700 opacity-20" />
         <div className="flex flex-row w-full gap-2 items-center h-[10%] p-6">

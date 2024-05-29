@@ -8,10 +8,10 @@ export const DashboardLayout = () => {
   const tokenStr = localStorage.getItem("token");
 
   useEffect(() => {
-    if (!tokenStr) window.location.href = "/";
+    if (!tokenStr) window.location.href = "/login";
 
     const data = tokenDec(tokenStr);
-    if (!data) window.location.href = "/";
+    if (!data) window.location.href = "/login";
   }, []);
 
   return (
