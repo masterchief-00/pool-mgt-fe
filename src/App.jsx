@@ -7,6 +7,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { AddPool } from "./pages/AddPool";
 import { AddOperators } from "./pages/AddOperators";
+import { Predict } from "./pages/Predict";
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
       {
         path: "/operator/create",
         element: <AddOperators />,
+      },
+      {
+        path: "/predict",
+        element: <Predict />,
       },
     ],
   },

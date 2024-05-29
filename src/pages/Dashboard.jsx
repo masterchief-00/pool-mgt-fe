@@ -94,24 +94,9 @@ export const Dashboard = () => {
                 {pools.length} total
               </label>
             </div>
-            <div className="flex flex-row gap-3">
-              <div className="flex flex-col gap-2 justify-center items-center">
-                <label className="font-bold text-2xl">5</label>
-                <label className="font-semibold text-md text-gray-400">
-                  Online
-                </label>
-              </div>
-              <div className="flex flex-col gap-2 justify-center items-center">
-                <label className="font-bold text-2xl">1</label>
-                <label className="font-semibold text-md text-gray-400">
-                  Offline
-                </label>
-              </div>
-            </div>
           </div>
           <div className="h-[85%] overflow-y-scroll">
             <TablePools
-              deviceStatus={deviceStatus}
               pools={pools}
               onEdit={setPoolEditModal}
               onDelete={setPoolDeleteModal}
@@ -167,7 +152,7 @@ export const Dashboard = () => {
             <div className="flex flex-col gap-1 w-full h-full">
               <label className="font-bold text-2xl">Available locations</label>
               <label className="font-semibold text-md text-gray-600">
-                6 total
+                {locations.length} total
               </label>
             </div>
           </div>

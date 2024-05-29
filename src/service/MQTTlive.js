@@ -1,5 +1,9 @@
 // src/mqttService.js
 import { Client } from "paho-mqtt";
+import { throttle } from "lodash";
+
+// Throttle interval in milliseconds
+const THROTTLE_INTERVAL = 15000;
 
 const MQTTlive = (topic, onMessage) => {
   // Create a client instance
@@ -16,10 +20,14 @@ const MQTTlive = (topic, onMessage) => {
     }
   };
 
+  // Throttled message handler
+  const throttledOnMessage = throttle((destinationName, payloadString) => {
+    onMessage(destinationName, payloadString);
+  }, THROTTLE_INTERVAL);
+
   client.onMessageArrived = (message) => {
-    // console.log(`onMessageArrived: ${message.payloadString}`);
-    // Call the onMessage callback with the received message
-    onMessage(message.destinationName, message.payloadString);
+    // Call the throttled onMessage callback with the received message
+    throttledOnMessage(message.destinationName, message.payloadString);
   };
 
   // Connect the client

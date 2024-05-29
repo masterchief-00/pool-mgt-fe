@@ -10,6 +10,7 @@ import poolAddSlice from "./slices/poolAddSlice";
 import operatorAddSlice from "./slices/operatorAddSlice";
 import locationsSlice from "./slices/locationsSlice";
 import poolUpdateSlice from "./slices/poolUpdateSlice";
+import forecastSlice from "./slices/forecastSlice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     operators: operatorAddSlice.reducer,
     locations: locationsSlice.reducer,
     poolUpdate: poolUpdateSlice.reducer,
+    forecast: forecastSlice.reducer,
   },
 });
 

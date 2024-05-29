@@ -7,9 +7,11 @@ export const TablePools = ({ onEdit, onDelete, role, pools }) => {
   const [DEVICE_TOPICS, setDEVICE_TOPICS] = useState([]);
   const [deviceStatus, setDeviceStatus] = useState({});
   const [mqttClient, setMqttClient] = useState(null);
+  const [online, setOnline] = useState(0);
+
   const navigation = useNavigate();
 
-  const CHECK_INTERVAL = 10000; // 10 seconds
+  const CHECK_INTERVAL = 2000; // 10 seconds
 
   const getTopic = (name) => {
     for (const item of DEVICE_TOPICS) {
@@ -222,13 +224,6 @@ export const TablePools = ({ onEdit, onDelete, role, pools }) => {
                             className="text-gray-600 px-1 mx-[0.7px] rounded-md bg-yellow-400 hover:underline"
                           >
                             Edit
-                          </a>
-                          <a
-                            href="#"
-                            onClick={() => handleDelete(12)}
-                            className="text-gray-600 px-1 mx-[0.7px] rounded-md bg-red-400 hover:underline"
-                          >
-                            Delete
                           </a>
                         </>
                       )}
