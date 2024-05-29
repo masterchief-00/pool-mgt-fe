@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import tokenDec from "../../helpers/tokenDec";
 import { userActions } from "./userSlice";
 import { capitalizeFirstLetter } from "../../helpers/capitalCase";
+import { variables } from "../../data/constants";
 
 const SERVER_URL = variables.SERVER_URL;
 
