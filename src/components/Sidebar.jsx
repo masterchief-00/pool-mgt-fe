@@ -5,7 +5,9 @@ import LOGO_IMG from "../assets/logo.png";
 
 export const Sidebar = () => {
   const activeLink = useSelector((state) => state.activeLinks.active);
-  const userState = useSelector((state) => state.user);
+  const userState = useSelector((state) => state.user.user);
+  const userRole = localStorage.getItem("user_role");
+  const userName = localStorage.getItem("user_name");
 
   return (
     <div className=" w-[22%] h-screen p-2">
@@ -20,7 +22,7 @@ export const Sidebar = () => {
             destination={"/dashboard"}
             active={activeLink === "Overview"}
           />
-          {userState.role === "admin" && (
+          {userRole === "admin" && (
             <SideNav
               label={"Pools"}
               destination={"/pool/create"}
@@ -28,20 +30,32 @@ export const Sidebar = () => {
             />
           )}
 
-          {userState.role === "admin" && (
+          {userRole === "admin" && (
             <SideNav
               label={"Operators"}
               destination={"/operator/create"}
               active={activeLink === "Operators"}
             />
           )}
+
+          <SideNav
+            label={"Prediction"}
+            destination={"/predict"}
+            active={activeLink === "Prediction"}
+          />
+
+          <SideNav
+            label={"History"}
+            destination={"/history"}
+            active={activeLink === "History"}
+          />
         </div>
         <div className="  w-[90%] h-[1px] bg-gray-700 opacity-20" />
         <div className="flex flex-row w-full gap-2 items-center h-[10%] p-6">
           <FaCircleUser size={45} />
           <div className="flex flex-col">
-            <label className=" font-semibold text-xl">Kalinda Vital</label>
-            <label className="text-gray-700 text-sm">{userState.role}</label>
+            <label className=" font-semibold text-xl">{userName}</label>
+            <label className="text-gray-700 text-sm">{userRole}</label>
           </div>
         </div>
       </div>

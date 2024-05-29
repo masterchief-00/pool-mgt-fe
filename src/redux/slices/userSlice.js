@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    role: "admin",
+    user: null,
   },
   reducers: {
-    setUserRole(state, action) {
-      state.role = action.payload;
+    setUserData(state, action) {
+      state.user = action.payload;
     },
   },
 });

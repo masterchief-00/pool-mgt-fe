@@ -53,6 +53,14 @@ const predictionSlice = createSlice({
     error: null,
     serverResponded: false,
   },
+  reducers: {
+    resetData(state, action) {
+      state.response = null;
+      state.serverResponded = false;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(predictionNow.pending, (state) => {
       state.loading = true;
@@ -71,4 +79,5 @@ const predictionSlice = createSlice({
   },
 });
 
+export const predictionActions = predictionSlice.actions;
 export default predictionSlice;

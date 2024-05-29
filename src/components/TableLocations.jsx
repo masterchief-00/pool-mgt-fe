@@ -1,4 +1,4 @@
-export const TableLocations = ({ onView }) => {
+export const TableLocations = ({ onView, locations }) => {
   const handleView = (id) => {
     onView({ open: true, id });
   };
@@ -44,64 +44,37 @@ export const TableLocations = ({ onView }) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr className="hover:bg-gray-100">
-                  <td className="p-4 w-4">
-                    <div className="flex items-center">
-                      <input
-                        id="checkbox-table-1"
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
-                      />
-                      <label htmlFor="checkbox-table-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                    Serena Hotel
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    6
-                  </td>
-                  <td className="flex flex-row gap-1 py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <a
-                      href="#"
-                      onClick={() => handleView(12)}
-                      className="text-gray-600 px-1 rounded-md bg-green-400 hover:underline"
-                    >
-                      View
-                    </a>
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-100">
-                  <td className="p-4 w-4">
-                    <div className="flex items-center">
-                      <input
-                        id="checkbox-table-1"
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
-                      />
-                      <label htmlFor="checkbox-table-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                    Four points
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    3
-                  </td>
-                  <td className="flex flex-row gap-1 py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <a
-                      href="#"
-                      onClick={() => handleView(12)}
-                      className="text-gray-600 px-1 rounded-md bg-green-400 hover:underline"
-                    >
-                      View
-                    </a>
-                  </td>
-                </tr>
+                {locations.map((loc) => (
+                  <tr key={loc.location} className="hover:bg-gray-100">
+                    <td className="p-4 w-4">
+                      <div className="flex items-center">
+                        <input
+                          id="checkbox-table-1"
+                          type="checkbox"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
+                        />
+                        <label htmlFor="checkbox-table-1" className="sr-only">
+                          checkbox
+                        </label>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                      {loc.location}
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      {loc.pools}
+                    </td>
+                    <td className="flex flex-row gap-1 py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      <a
+                        href="#"
+                        onClick={() => handleView(loc.location)}
+                        className="text-gray-600 px-1 rounded-md bg-green-400 hover:underline"
+                      >
+                        View
+                      </a>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

@@ -7,18 +7,26 @@ import { Dashboard } from "./pages/Dashboard";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { AddPool } from "./pages/AddPool";
 import { AddOperators } from "./pages/AddOperators";
+import { Predict } from "./pages/Predict";
+import { HistoricalData } from "./pages/HistoricalData";
+import { LandingPage } from "./pages/LandingPage";
 
 const routes = [
   {
     path: "/",
     element: <DefaultLayout />,
-    children: [{ path: "/", element: <Login /> }],
+    children: [{ path: "/", element: <LandingPage /> }],
+  },
+  {
+    path: "/",
+    element: <DefaultLayout />,
+    children: [{ path: "/login", element: <Login /> }],
   },
   {
     path: "/",
     element: <DashboardLayout />,
     children: [
-      { path: "/pool/data", element: <Pool /> },
+      { path: "/pool/data/:topic", element: <Pool /> },
       {
         path: "/dashboard",
         element: <Dashboard />,
@@ -30,6 +38,14 @@ const routes = [
       {
         path: "/operator/create",
         element: <AddOperators />,
+      },
+      {
+        path: "/predict",
+        element: <Predict />,
+      },
+      {
+        path: "/history",
+        element: <HistoricalData />,
       },
     ],
   },

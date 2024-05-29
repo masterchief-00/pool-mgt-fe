@@ -1,4 +1,7 @@
-export const TableOperators = () => {
+export const TableOperators = ({ onDelete, role, operators = [] }) => {
+  const handleDelete = (id) => {
+    onDelete({ open: true, id });
+  };
   return (
     <div className="flex flex-col mt-4">
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
@@ -58,104 +61,56 @@ export const TableOperators = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr className="hover:bg-gray-100">
-                  <td className="p-4 w-4">
-                    <div className="flex items-center">
-                      <input
-                        id="checkbox-table-1"
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
-                      />
-                      <label htmlFor="checkbox-table-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                    Kalinda
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    Vital
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    123456789
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    kv@gmail.com
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    Serena hotel
-                  </td>
-                  <td className="flex flex-row gap-1 py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <a
-                      href="#"
-                      className="text-gray-600 px-1 rounded-md bg-green-400 hover:underline"
-                    >
-                      View
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-600 px-1 rounded-md bg-yellow-400 hover:underline"
-                    >
-                      Edit
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-600 px-1 rounded-md bg-red-400 hover:underline"
-                    >
-                      Delete
-                    </a>
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-100">
-                  <td className="p-4 w-4">
-                    <div className="flex items-center">
-                      <input
-                        id="checkbox-table-1"
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
-                      />
-                      <label htmlFor="checkbox-table-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                    Kalinda
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    Vital
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    123456789
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    kv@gmail.com
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    Serena hotel
-                  </td>
-                  <td className="flex flex-row gap-1 py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <a
-                      href="#"
-                      className="text-gray-600 px-1 rounded-md bg-green-400 hover:underline"
-                    >
-                      View
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-600 px-1 rounded-md bg-yellow-400 hover:underline"
-                    >
-                      Edit
-                    </a>
-                    <a
-                      href="#"
-                      className="text-gray-600 px-1 rounded-md bg-red-400 hover:underline"
-                    >
-                      Delete
-                    </a>
-                  </td>
-                </tr>
+                {operators.map((operator) => (
+                  <tr key={operator.id} className="hover:bg-gray-100">
+                    <td className="p-4 w-4">
+                      <div className="flex items-center">
+                        <input
+                          id="checkbox-table-1"
+                          type="checkbox"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
+                        />
+                        <label htmlFor="checkbox-table-1" className="sr-only">
+                          checkbox
+                        </label>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                      {operator.fname}
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      {operator.lname}
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      {operator.phone}
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      {operator.email}
+                    </td>
+                    <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      {operator.location}
+                    </td>
+                    <td className="flex flex-row gap-1 py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                      <a
+                        href="#"
+                        className="text-gray-600 px-1 rounded-md bg-green-400 hover:underline"
+                      >
+                        View
+                      </a>
+                      {role === "admin" && (
+                        <>
+                          <a
+                            href="#"
+                            onClick={() => handleDelete(12)}
+                            className="text-gray-600 px-1 rounded-md bg-red-400 hover:underline"
+                          >
+                            Delete
+                          </a>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
